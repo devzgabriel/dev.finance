@@ -25,12 +25,13 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O Happy é uma aplicação que ajuda as pessoas a monitorarem melhor o seu dinheiro! 💸
+O devFinance é uma aplicação que ajuda as pessoas a monitorarem melhor o seu dinheiro! 💸
 
+<!--
 ## :memo: Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes. -->
 
 ---
 
-Feito com por Gabriel Silva com ensinamentos da Rocketseat! 💜
+Feito por Gabriel Silva com ensinamentos da Rocketseat pelo Mestre Mayk Brito! 💜
