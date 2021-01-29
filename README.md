@@ -35,3 +35,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 ---
 
 Feito por Gabriel Silva com ensinamentos da Rocketseat pelo Mestre Mayk Brito! 💜
+
+### Mudanças futuras:
+
+- Methodos open e close virar modal
