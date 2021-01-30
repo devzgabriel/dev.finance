@@ -15,43 +15,34 @@ const Modal = {
   },
 }
 
-const Transacion = {
-  all: [
-    {
-      description: "Luz",
-      amount: -50000,
-      date: "23/01/2021",
-    },
-    {
-      description: "sitezin",
-      amount: 500000,
-      date: "19/01/2021",
-    },
-    {
-      description: "neti",
-      amount: -9000,
-      date: "25/01/2021",
-    },
-    {
-      description: "baguin",
-      amount: 300000,
-      date: "25/01/2021",
-    },
-  ],
+const Storage = {
+  get() {
+    return JSON.parse(localStorage.getItem("dev.finances:transactions")) || []
+  },
+  set(transactions) {
+    localStorage.setItem(
+      "dev.finances:transactions",
+      JSON.stringify(transactions)
+    )
+  },
+}
+
+const Transaction = {
+  all: Storage.get(),
   add(transaction) {
-    Transacion.all.push(transaction)
+    Transaction.all.push(transaction)
 
     App.reload()
   },
 
   remove(index) {
-    Transacion.all.splice(index, 1)
+    Transaction.all.splice(index, 1)
     App.reload()
   },
 
   incomes() {
     let income = 0
-    Transacion.all.forEach((transaction) => {
+    Transaction.all.forEach((transaction) => {
       if (transaction.amount > 0) income += transaction.amount
     })
 
@@ -60,7 +51,7 @@ const Transacion = {
 
   expenses() {
     let expense = 0
-    Transacion.all.forEach((transaction) => {
+    Transaction.all.forEach((transaction) => {
       if (transaction.amount < 0) expense += transaction.amount
     })
 
@@ -68,7 +59,7 @@ const Transacion = {
   },
 
   total() {
-    return Transacion.incomes() + Transacion.expenses()
+    return Transaction.incomes() + Transaction.expenses()
   },
 }
 
@@ -76,7 +67,8 @@ const DOM = {
   transactionsContainer: document.querySelector("#data-table tbody"),
   addTransaction(transaction, index) {
     const tr = document.createElement("tr")
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction)
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
+    tr.dataset.index = index
 
     DOM.transactionsContainer.appendChild(tr)
   },
@@ -85,7 +77,7 @@ const DOM = {
     DOM.transactionsContainer.innerHTML = ""
   },
 
-  innerHTMLTransaction(transaction) {
+  innerHTMLTransaction(transaction, index) {
     const { description, amount, date } = transaction
 
     const CSSclass = amount > 0 ? "income" : "expense"
@@ -97,7 +89,7 @@ const DOM = {
         <td class="${CSSclass}">${amountFormated}</td>
         <td class="date">${date}</td>
         <td>
-          <img src="./assets/minus.svg" alt="Remover transação" />
+          <img onClick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação" />
         </td>
       </tr>
     `
@@ -108,15 +100,15 @@ const DOM = {
   updateBalance() {
     const incomeDisplay = (document.querySelector(
       "#incomeDisplay"
-    ).innerHTML = Utils.formatCurrency(Transacion.incomes()))
+    ).innerHTML = Utils.formatCurrency(Transaction.incomes()))
 
     const expenseDisplay = (document.querySelector(
       "#expenseDisplay"
-    ).innerHTML = Utils.formatCurrency(Transacion.expenses()))
+    ).innerHTML = Utils.formatCurrency(Transaction.expenses()))
 
     const totalDisplay = (document.querySelector(
       "#totalDisplay"
-    ).innerHTML = Utils.formatCurrency(Transacion.total()))
+    ).innerHTML = Utils.formatCurrency(Transaction.total()))
   },
 }
 
@@ -191,7 +183,7 @@ const Form = {
     try {
       Form.validateFields()
       const transaction = Form.formatValues()
-      Transacion.add(transaction)
+      Transaction.add(transaction)
       Form.clearFields()
       Modal.close()
       App.reload()
@@ -203,10 +195,9 @@ const Form = {
 
 const App = {
   init() {
-    Transacion.all.forEach((transaction) => {
-      DOM.addTransaction(transaction)
-    })
+    Transaction.all.forEach(DOM.addTransaction)
     DOM.updateBalance()
+    Storage.set(Transaction.all)
   },
   reload() {
     DOM.clearTransactions()
