@@ -280,6 +280,54 @@ input {
   width: 48%;
 }
 
+.expenseCheckDiv {
+  margin: 1rem 0;
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: center;
+}
+.expenseText {
+  width: auto;
+  opacity: 0.5;
+}
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.checkLabel {
+  margin-left: 1.7rem;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* creating a custom checkbox based on demand */
+.ckeckSpan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.6rem;
+  width: 1.6rem;
+  background-color: #f1f1f1;
+  border-radius: 25%;
+  border: 1px solid rgb(145, 0, 0);
+}
+
+/* specify the background color to be 
+shown when hovering over checkbox */
+.checkLabel:hover input ~ .ckeckSpan {
+  background-color: rgb(253, 236, 236);
+}
+
+/* specify the background color to be 
+shown when checkbox is checked */
+.checkLabel input:checked ~ .ckeckSpan {
+  background-color: var(--red);
+}
+
 /* Footer ===================== */
 footer {
   text-align: center;

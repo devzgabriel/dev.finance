@@ -118,8 +118,7 @@ const Utils = {
     return signal + " " + value
   },
   formatAmount(value) {
-    value = Number(value.replace(/\,\./g, "")) * 100
-    return value
+    return Number(value.replace(/\,\.\-/g, "")) * 100
   },
   formatDate(date) {
     const splittedDate = date.split("-")
@@ -131,13 +130,20 @@ const Form = {
   description: document.querySelector("input#description"),
   amount: document.querySelector("input#amount"),
   date: document.querySelector("input#date"),
+  expense: document.querySelector("input#expense"),
+  situation: "",
 
   getValues() {
+    Form.getSituation()
     return {
       description: Form.description.value,
-      amount: Form.amount.value,
+      amount: Form.situation + String(Form.amount.value),
       date: Form.date.value,
     }
+  },
+
+  getSituation() {
+    Form.situation = Form.expense.checked ? "-" : ""
   },
 
   validateFields() {
@@ -167,6 +173,7 @@ const Form = {
     Form.description.value = ""
     Form.amount.value = ""
     Form.date.value = ""
+    Form.expense.checked = false
   },
 
   submit(event) {
