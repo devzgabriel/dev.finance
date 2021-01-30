@@ -1,17 +1,9 @@
 const Modal = {
-  open() {
-    // Abrir modal
-    // Adicionar a class active ao modal
-    document.querySelector(".modal-overlay").classList.add("active")
-  },
-  close() {
-    // fechar o modal
-    // remover a class active do modal
-    document.querySelector(".modal-overlay").classList.remove("active")
-  },
+  modalClasses: document.querySelector(".modal-overlay").classList,
   toogle() {
-    //se existe classe active, remover
-    //se não colocar
+    Modal.modalClasses.contains("active")
+      ? Modal.modalClasses.remove("active")
+      : Modal.modalClasses.add("active")
   },
 }
 
@@ -185,7 +177,7 @@ const Form = {
       const transaction = Form.formatValues()
       Transaction.add(transaction)
       Form.clearFields()
-      Modal.close()
+      Modal.toogle()
       App.reload()
     } catch (error) {
       alert(error.message)
