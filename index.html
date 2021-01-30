@@ -71,7 +71,7 @@
       <div class="modal">
         <div id="form">
           <h2>Nova Transação</h2>
-          <form action="">
+          <form action="" onsubmit="Form.submit(event)">
             <div class="input-group">
               <label class="sr-only" for="description">Descrição</label>
               <input
@@ -92,7 +92,7 @@
                 placeholder="0,00"
               />
               <small class="help"
-                >Use o sinal - (negativo) para despesas e , (vírgula) para casas
+                >Use o sinal - (negativo) para despesas e "." (ponto) para casas
                 decimais</small
               >
             </div>
