@@ -49,9 +49,15 @@
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
 
-        <a href="#" onclick="Modal.toogle()" class="button new"
-          >+ Nova Transação</a
-        >
+        <div class="newDark">
+          <a href="#" onclick="Modal.toogle()" class="button new"
+            >+ Nova Transação</a
+          >
+
+          <button class="toDark" onclick="Utils.toogleDarkMode()">
+            Toogle Dark Mode
+          </button>
+        </div>
 
         <table id="data-table">
           <thead>

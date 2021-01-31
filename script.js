@@ -124,6 +124,23 @@ const Utils = {
     const splittedDate = date.split("-")
     return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
   },
+  toogleDarkMode() {
+    header = document.querySelector("header").classList
+    body = document.querySelector("body").classList
+    footer = document.querySelector("footer").classList
+    buttonDark = document.querySelector("button.toDark").classList
+    if (body.contains("dark")) {
+      body.remove("dark")
+      header.remove("dark")
+      footer.remove("dark")
+      buttonDark.remove("dark")
+    } else {
+      body.add("dark")
+      header.add("dark")
+      footer.add("dark")
+      buttonDark.add("dark")
+    }
+  },
 }
 
 const Form = {

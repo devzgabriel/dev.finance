@@ -4,6 +4,10 @@
   --green: #49aa26;
   --light-green: #3dd705;
   --red: #e92929;
+  --bg-light: #f0f2f5;
+  --bg-dark: #3a3b44;
+  --header: #2d4a22;
+  --header-dark: #1e1e1e;
 }
 
 * {
@@ -17,8 +21,12 @@ html {
 }
 
 body {
-  background: #f0f2f5;
+  background: var(--bg-light);
   font-family: "Poppins", sans-serif;
+}
+
+body.dark {
+  background: var(--bg-dark);
 }
 
 .sr-only {
@@ -36,6 +44,13 @@ body {
 .container {
   width: min(90vw, 800px);
   margin: auto;
+}
+
+.newDark {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.1rem 0.1rem 0.4rem 0;
 }
 
 /* Titles ===================== */
@@ -77,9 +92,22 @@ button:hover {
   background: var(--light-green);
 }
 
+button.toDark {
+  display: inline;
+
+  height: 30px;
+  width: 140px;
+  background-color: var(--bg-dark);
+}
+
+button.toDark.dark {
+  background-color: var(--bg-dark);
+  border: 2px solid #ffffffb0;
+}
+
 .button.new {
   display: inline-block;
-  margin-bottom: 0.8rem;
+  /* margin-bottom: 0.8rem; */
 }
 
 .button.cancel {
@@ -102,9 +130,13 @@ button:hover {
 
 /* Header ===================== */
 header {
-  background: #2d4a22;
-  padding: 2rem 0 10rem;
+  background: var(--header);
+  padding: 3rem 0 10rem;
   text-align: center;
+}
+
+header.dark {
+  background: var(--header-dark);
 }
 
 #logo {
@@ -236,7 +268,7 @@ td.expense {
 }
 
 .modal {
-  background: #f0f2f5;
+  background: var(--bg-light);
   padding: 2.4rem;
 
   position: relative;
@@ -309,8 +341,8 @@ input[type="checkbox"] {
   position: absolute;
   top: 0;
   left: 0;
-  height: 1.6rem;
-  width: 1.6rem;
+  height: 1.5rem;
+  width: 1.5rem;
   background-color: #f1f1f1;
   border-radius: 25%;
   border: 1px solid rgb(145, 0, 0);
@@ -335,6 +367,10 @@ footer {
   color: var(--dark-blue);
 
   opacity: 0.6;
+}
+
+footer.dark {
+  color: white;
 }
 
 /* Responsive ===================== */
